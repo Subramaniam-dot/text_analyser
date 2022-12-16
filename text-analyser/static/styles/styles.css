@@ -1,0 +1,28 @@
+.btn {
+    padding: 8px 18px;
+    background: unset;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background: lightseagreen;
+    color: white;
+}
+
+.fa-github {
+    content: "\f09b";
+    color: white;
+    right: 0;
+    position: absolute;
+    font-size: 32px;
+    padding: 8px 0px;
+    top: 0;
+    margin: 0 5rem;
+}
+
+body {
+    color: #1d2327;
+}

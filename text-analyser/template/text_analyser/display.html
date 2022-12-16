@@ -1,0 +1,62 @@
+{% include 'header.html' %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/text-analyser.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+<div style="position: relative;">
+    <textarea class="text-analyser" id="text-area-content" rows="4" cols="50" maxlength="1000">
+</textarea>
+    <br>
+    <div class="center-align">
+        <div class="checkbox-wrap">
+            <div class="select-align"><input type="checkbox" id="sentiment" name="sentiment" value="Bike">
+                <label for="sentiment">Sentiment Analysis</label>
+            </div>
+            <div class="select-align"><input type="checkbox" id="toxic" name="toxic" value="Car">
+                <label for="toxic">Detect Toxic Language</label>
+            </div>
+            <div class="select-align"><input type="checkbox" id="context" name="context" value="Boat">
+                <label for="context">Identify Context</label>
+            </div>
+        </div>
+    </div>
+    <div class="center-align align-analyse">
+        <button class="btn btn-submit" id="btn-analyse">
+            Analyse
+        </button>
+    </div>
+</div>
+<script>
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const analyseButton = document.getElementById('btn-analyse')
+    analyseButton.addEventListener('click', function () {
+
+        var text_content = document.getElementById('text-area-content').value;
+        var sentiment = document.getElementById('sentiment').checked;
+        var context = document.getElementById('context').checked;
+        var toxic = document.getElementById('toxic').checked;
+        var payload = JSON.stringify({
+            "data": text_content,
+            "toxic": toxic,
+            "sentiment": sentiment,
+            "context": context
+        });
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: payload,
+            redirect: 'follow'
+        };
+        const URLBase = window.location.origin
+        fetch(URLBase, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var res = JSON.parse(result)
+                if (res['id']) {
+                    window.location.href = URLBase + '/analyse/' + res['id'];
+                }
+            })
+            .catch(error => console.log('error', error));
+    });
+
+</script>
