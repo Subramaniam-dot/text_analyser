@@ -16,7 +16,7 @@ Using Flask to build a Text Analyser with Restful API Server.
 1. Clone the repository
 
 	```sh
-	git clone https://github.com/thesouleddev/text-analyser.git
+	git clone https://github.com/Subramaniam-dot/text_analyser/tree/main/text-analyser.git
 	```
 2. Create virtual environment and install requirements with pip
 
